@@ -1,0 +1,78 @@
+{% extends 'Admin/Head.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Styling for the form table */
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #021602;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+
+        /* Styling for the heading */
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Feedback Table</h2>
+    
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="2" align="center">
+            <tr>
+                <th>#</th>
+                <th>Feedback</th>
+            </tr>
+            {% for i in result %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.feedback_content}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+
+</body>
+</html>
+
+{% endblock content %}

@@ -1,0 +1,120 @@
+{% extends 'Ashaworker/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newborn Vaccine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f5f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto 40px;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8fafc;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #0284c7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0369a1;
+        }
+
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Newborn Vaccination Form</h1>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="sel_vaccine">Select Vaccine:</label>
+        <select name="sel_vaccine" id="sel_vaccine">
+            {% for i in vaccine %}
+                <option value="{{i.id}}">{{i.vaccine_name}}</option>
+            {% endfor %}
+        </select>
+
+        <label for="vaccine_date">Date:</label>
+        <input type="date" name="vaccine_date" id="vaccine_date" required>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Vaccine</th>
+                <th>Date</th>
+                <!-- <th>Action</th> -->
+            </tr>
+            {% for i in vaccinedetails %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.vaccine.vaccine_name}}</td>
+                <td>{{i.vaccine_date}}</td>
+                <!-- <td><a href="{% url 'Admin:delnoti' i.id%}">Delete</a></td> -->
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+</html>
+
+{% endblock %}

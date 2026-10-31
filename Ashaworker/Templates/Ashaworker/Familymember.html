@@ -1,0 +1,181 @@
+{% extends 'Ashaworker/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FamilyMember</title>
+    <!-- Inline CSS for Styling -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #6f4caf;
+            color: white;
+        }
+
+        td {
+            background-color: #f9f9f9;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f1f1f1;
+        }
+
+        tr:hover {
+            background-color: #e8e8e8;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"], input[type="email"], input[type="radio"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #1b68b9;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .gender-inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gender-inputs input {
+            margin-right: 10px;
+        }
+
+        .table-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Form to Add Family Member -->
+        <h2>Add Family Member</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="txt_name">Name</label>
+                <input required type="text" name="txt_name" title="Name Allows Only Alphabets,Spaces and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" />
+            </div>
+
+            <div class="form-group">
+                <label for="txt_age">Age</label>
+                <input type="text" name="txt_age" id="txt_age" required />
+            </div>
+
+            <div class="form-group">
+                <label for="txt_job">Job</label>
+                <input type="text" name="txt_job" id="txt_job" required />
+            </div>
+
+            <div class="form-group">
+                <label for="txt_health">Health</label>
+                <input type="text" name="txt_health" id="txt_health" required />
+            </div>
+
+            <div class="form-group gender-inputs">
+                <label>Gender</label>
+                <input type="radio" required name="txt_gender" value="Male" /> Male
+                <input type="radio" name="txt_gender" value="Female" /> Female
+                <input type="radio" name="txt_gender" value="Others" /> Others
+            </div>
+
+            <div class="form-group">
+                <label for="txt_email">Email</label>
+                <input type="email" id="txt_email" required name="txt_email" placeholder="username@gmail.com" pattern="^[^\s@]+@gmail\.com$" title="Please enter a valid Gmail address (e.g., example@gmail.com)." />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Add" />
+            </div>
+        </form>
+    </div>
+
+    <!-- Table to Display Family Members -->
+    <div class="container table-container">
+        <h2 class="text-center">Family Members</h2>
+        <table>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Job</th>
+                <th>Health</th>
+                <th>Gender</th>
+                <th>Email</th>
+            </tr>
+            {% for i in result %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.member_name}}</td>
+                <td>{{i.member_age}}</td>
+                <td>{{i.member_job}}</td>
+                <td>{{i.member_health}}</td>
+                <td>{{i.member_gender}}</td>
+                <td>{{i.member_email}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}

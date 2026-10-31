@@ -1,0 +1,104 @@
+{% extends 'Ashaworker/Header.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 30px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Profile</h1>
+        <form method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><strong>Name</strong></td>
+                    <td>{{ Ashaworker.asha_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email</strong></td>
+                    <td>{{ Ashaworker.asha_email }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Contact</strong></td>
+                    <td>{{ Ashaworker.asha_contact }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Ward</strong></td>
+                    <td>{{ Ashaworker.ward_number }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <a href="{% url 'Ashaworker:editprofile' %}">Edit Profile</a>
+                        <a href="{% url 'Ashaworker:changepassword' %}">Change Password</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}
